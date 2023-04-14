@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "leo_starry_eyed.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

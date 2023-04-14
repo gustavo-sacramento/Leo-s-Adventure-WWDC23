@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "leo_smacking_lips.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

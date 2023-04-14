@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "prato.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
