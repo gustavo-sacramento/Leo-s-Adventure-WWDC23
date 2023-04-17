@@ -6,7 +6,9 @@
 //
 
 import SwiftUI
-import AVFAudio
+import AVKit
+import UIKit
+import AVFoundation
 
 @available(iOS 16.0, *)
 struct LiveLoopView: View {
@@ -20,12 +22,18 @@ struct LiveLoopView: View {
     
     @State var showText = true
     
-    @State var violaAudioPlayer: AVAudioPlayer?
-    @State var pandeiroAudioPlayer: AVAudioPlayer?
-    @State var pratoAudioPlayer: AVAudioPlayer?
-    @State var atabaqueAudioPlayer: AVAudioPlayer?
-    @State var surdoAudioPlayer: AVAudioPlayer?
-    @State var clapsAudioPlayer: AVAudioPlayer?
+    @State var violaAudioPlayer: AVQueuePlayer?
+    @State var violaLooper: AVPlayerLooper?
+    @State var pandeiroAudioPlayer: AVQueuePlayer?
+    @State var pandeiroLooper: AVPlayerLooper?
+    @State var pratoAudioPlayer: AVQueuePlayer?
+    @State var pratoLooper: AVPlayerLooper?
+    @State var atabaqueAudioPlayer: AVQueuePlayer?
+    @State var atabaqueLooper: AVPlayerLooper?
+    @State var surdoAudioPlayer: AVQueuePlayer?
+    @State var surdoLooper: AVPlayerLooper?
+    @State var clapsAudioPlayer: AVQueuePlayer?
+    @State var clapsLooper: AVPlayerLooper?
     
     var body: some View {
         NavigationStack {
@@ -72,12 +80,12 @@ struct LiveLoopView: View {
                         .frame(width: responsiveX(450), height: responsiveY(150))
                     }
                     .simultaneousGesture(TapGesture().onEnded {
-                        violaAudioPlayer?.stop()
-                        pandeiroAudioPlayer?.stop()
-                        clapsAudioPlayer?.stop()
-                        pratoAudioPlayer?.stop()
-                        atabaqueAudioPlayer?.stop()
-                        surdoAudioPlayer?.stop()
+                        violaAudioPlayer?.pause()
+                        pandeiroAudioPlayer?.pause()
+                        clapsAudioPlayer?.pause()
+                        pratoAudioPlayer?.pause()
+                        atabaqueAudioPlayer?.pause()
+                        surdoAudioPlayer?.pause()
                     })
                     .offset(x: responsiveX(-440), y: responsiveY(-410))
                 }
@@ -131,76 +139,65 @@ struct LiveLoopView: View {
             }
             .navigationBarBackButtonHidden(true)
             .onAppear(perform: {
-                playSound("pandeiro.mp3", player: &pandeiroAudioPlayer)
-                playSound("viola.mp3", player: &violaAudioPlayer)
-                playSound("claps.mp3", player: &clapsAudioPlayer)
-                playSound("surdo.mp3", player: &surdoAudioPlayer)
-                playSound("atabaque.mp3", player: &atabaqueAudioPlayer)
-                playSound("prato.mp3", player: &pratoAudioPlayer)
+                playSound("pandeiro.mp3", &pandeiroAudioPlayer, &pandeiroLooper)
+                playSound("viola.mp3", &violaAudioPlayer, &violaLooper)
+                playSound("claps.mp3", &clapsAudioPlayer, &clapsLooper)
+                playSound("surdo.mp3", &surdoAudioPlayer, &surdoLooper)
+                playSound("atabaque.mp3", &atabaqueAudioPlayer, &atabaqueLooper)
+                playSound("prato.mp3", &pratoAudioPlayer, &pratoLooper)
                 
                 let when = DispatchTime.now()
                 
-                if let pandeiroAudioPlayer {
-                    DispatchQueue.main.asyncAfter(deadline: when + 0.1) {
-                        pandeiroAudioPlayer.play()
-                    }
-                }
-                  
-                if let violaAudioPlayer {
-                    DispatchQueue.main.asyncAfter(deadline: when + 0.1) {
-                        violaAudioPlayer.play()
-                    }
-                }
-                
-                if let clapsAudioPlayer {
-                    DispatchQueue.main.asyncAfter(deadline: when + 0.1) {
-                        clapsAudioPlayer.play()
-                    }
-                }
-                
-                if let surdoAudioPlayer {
-                    DispatchQueue.main.asyncAfter(deadline: when + 0.1) {
-                        surdoAudioPlayer.play()
-                    }
-                }
-                
-                if let atabaqueAudioPlayer {
-                    DispatchQueue.main.asyncAfter(deadline: when + 0.1) {
-                        atabaqueAudioPlayer.play()
-                    }
-                }
-                
-                if let pratoAudioPlayer {
-                    DispatchQueue.main.asyncAfter(deadline: when + 0.1) {
-                        pratoAudioPlayer.play()
+                DispatchQueue.main.asyncAfter(deadline: when + 0.1) {
+                    
+                    if let pandeiroAudioPlayer, let violaAudioPlayer, let clapsAudioPlayer, let surdoAudioPlayer, let pratoAudioPlayer, let atabaqueAudioPlayer {
+                        
+                        let syncTime = CMClockGetHostTimeClock()
+                        let hostTime = CMClockGetTime(syncTime)
+                        
+                        let arr = [pandeiroAudioPlayer, violaAudioPlayer, clapsAudioPlayer, surdoAudioPlayer, pratoAudioPlayer, atabaqueAudioPlayer]
+                        
+                        for player in arr {
+                            if player.status != .readyToPlay {
+                                return
+                            }
+                            player.preroll(atRate: 1.0)
+                        }
+                        
+                        for player in arr {
+                            player.setRate(1.0, time: .invalid, atHostTime: hostTime)
+                        }
+                        
                     }
                 }
             })
         }
     }
     
-    func playSound(_ soundFileName : String, player: inout AVAudioPlayer?) {
+    func playSound(_ soundFileName : String, _ player: inout AVQueuePlayer?, _ playerLooper: inout AVPlayerLooper?) {
         guard let soundURL = Bundle.main.url(forResource: soundFileName, withExtension: nil) else {
             fatalError("Unable to find \(soundFileName) in bundle")
         }
+                       
+        let playerItem = AVPlayerItem(url: soundURL)
         
         do {
-            player = try AVAudioPlayer(contentsOf: soundURL)
+            player = AVQueuePlayer(playerItem: playerItem)
         } catch {
             print(error.localizedDescription)
         }
         
         if let player {
-            player.setVolume(0, fadeDuration: 0)
-            player.numberOfLoops = -1
-            player.prepareToPlay()
+            playerLooper = AVPlayerLooper(player: player, templateItem: playerItem)
+            player.volume = 0.0
+            player.automaticallyWaitsToMinimizeStalling = false
         }
     }
 
     
     struct CustomToggleStyle: ToggleStyle {
         @State var instrumentButton: String
-        @Binding var player: AVAudioPlayer?
+        @Binding var player: AVQueuePlayer?
         @State var factor: Float
         @Binding var showText: Bool
         
@@ -212,10 +209,12 @@ struct LiveLoopView: View {
                     
                     if let player {
                         if configuration.isOn {
-                            player.setVolume(1 * factor, fadeDuration: 0)
+                            player.volume = 1.0 * factor
                         } else {
-                            player.setVolume(0, fadeDuration: 0.1)
+                            player.volume = 0.0
                         }
+                    } else {
+                        print("it doesnt exist")
                     }
                 }, label: {
                     if configuration.isOn {

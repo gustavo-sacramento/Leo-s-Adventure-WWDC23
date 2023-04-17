@@ -79,10 +79,6 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 extension View{
-    func getScreenBounds() -> CGRect {
-        return UIScreen.main.bounds
-    }
-    
     func responsiveX(_ originalWidth: Int) -> CGFloat {
         return CGFloat(originalWidth) * (UIScreen.main.bounds.width / 1366)
     }
