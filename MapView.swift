@@ -21,24 +21,24 @@ struct MapView: View {
             ZStack {
                 Image("map")
                     .resizable()
-                    .frame(width: getWidth(1366), height:
-                        getHeight(1024))
+                    .frame(width: responsiveX(1366), height:
+                        responsiveY(1024))
                     .ignoresSafeArea()
                 
                 if !surdoHasTapped {
                     NavigationLink(destination: SurdoView()) {
                         Image("surdo")
                             .resizable()
-                            .frame(width: getWidth(106), height: getHeight(147))
+                            .frame(width: responsiveX(106), height: responsiveY(147))
                     }.simultaneousGesture(TapGesture().onEnded {
                         surdoHasTapped = true
                     })
-                    .offset(x: getWidth(530), y: getHeight(-80))
+                    .offset(x: responsiveX(530), y: responsiveY(-80))
                 } else {
                     Image("surdo_check")
                         .resizable()
-                        .frame(width: getWidth(180), height: getHeight(200))
-                        .offset(x: getWidth(530), y: getHeight(-80))
+                        .frame(width: responsiveX(180), height: responsiveY(200))
+                        .offset(x: responsiveX(530), y: responsiveY(-80))
                 }
                 
                 
@@ -46,80 +46,80 @@ struct MapView: View {
                     NavigationLink(destination: ViolaView()) {
                         Image("viola")
                             .resizable()
-                            .frame(width: getWidth(205), height: getHeight(150))
+                            .frame(width: responsiveX(205), height: responsiveY(150))
                     }.simultaneousGesture(TapGesture().onEnded {
                         violaHasTapped = true
                     })
-                    .offset(x: getWidth(-100), y: getHeight(250))
+                    .offset(x: responsiveX(-100), y: responsiveY(250))
                 } else {
                     Image("viola_check")
                         .resizable()
-                        .frame(width: getWidth(205), height: getHeight(179))
-                        .offset(x: getWidth(-100), y: getHeight(250))
+                        .frame(width: responsiveX(205), height: responsiveY(179))
+                        .offset(x: responsiveX(-100), y: responsiveY(250))
                 }
                 
                 if !pandeiroHasTapped {
                     NavigationLink(destination: PandeiroView()) {
                         Image("pandeiro")
                             .resizable()
-                            .frame(width: getWidth(178), height: getHeight(102))
+                            .frame(width: responsiveX(178), height: responsiveY(102))
                     }.simultaneousGesture(TapGesture().onEnded {
                         pandeiroHasTapped = true
                     })
-                    .offset(x: getWidth(280), y: getHeight(230))
+                    .offset(x: responsiveX(280), y: responsiveY(230))
                 } else {
                     Image("pandeiro_check")
                         .resizable()
-                        .frame(width: getWidth(203), height: getHeight(159))
-                        .offset(x: getWidth(280), y: getHeight(230))
+                        .frame(width: responsiveX(203), height: responsiveY(159))
+                        .offset(x: responsiveX(280), y: responsiveY(230))
                 }
                 
                 if !atabaqueHasTapped {
                     NavigationLink(destination: AtabaqueView()) {
                         Image("atabaque")
                             .resizable()
-                            .frame(width: getWidth(110), height: getHeight(185))
+                            .frame(width: responsiveX(110), height: responsiveY(185))
                     }.simultaneousGesture(TapGesture().onEnded {
                         atabaqueHasTapped = true
                     })
-                    .offset(x: getWidth(300), y: getHeight(-350))
+                    .offset(x: responsiveX(300), y: responsiveY(-350))
                 } else {
                     Image("atabaque_check")
                         .resizable()
-                        .frame(width: getWidth(211), height: getHeight(209))
-                        .offset(x: getWidth(300), y: getHeight(-350))
+                        .frame(width: responsiveX(211), height: responsiveY(209))
+                        .offset(x: responsiveX(300), y: responsiveY(-350))
                 }
                 
                 if !pratoHasTapped {
                     NavigationLink(destination: PratoView()) {
                         Image("prato")
                             .resizable()
-                            .frame(width: getWidth(203), height: getHeight(159))
+                            .frame(width: responsiveX(203), height: responsiveY(159))
                     }.simultaneousGesture(TapGesture().onEnded {
                         pratoHasTapped = true
                     })
-                    .offset(x: getWidth(-430), y: getHeight(-225))
+                    .offset(x: responsiveX(-430), y: responsiveY(-225))
                 } else {
                     Image("prato_check")
                         .resizable()
-                        .frame(width: getWidth(203), height: getHeight(182))
-                        .offset(x: getWidth(-430), y: getHeight(-225))
+                        .frame(width: responsiveX(203), height: responsiveY(182))
+                        .offset(x: responsiveX(-430), y: responsiveY(-225))
                 }
                 
                 if !clapsHasTapped {
                     NavigationLink(destination: ClapsView()) {
                         Image("claps")
                             .resizable()
-                            .frame(width: getWidth(175), height: getHeight(165))
+                            .frame(width: responsiveX(175), height: responsiveY(165))
                     }.simultaneousGesture(TapGesture().onEnded {
                         clapsHasTapped = true
                     })
-                    .offset(x: getWidth(-500), y: getHeight(200))
+                    .offset(x: responsiveX(-500), y: responsiveY(200))
                 } else {
                     Image("claps_check")
                         .resizable()
-                        .frame(width: getWidth(185), height: getHeight(197))
-                        .offset(x: getWidth(-500), y: getHeight(200))
+                        .frame(width: responsiveX(185), height: responsiveY(197))
+                        .offset(x: responsiveX(-500), y: responsiveY(200))
                 }
                 
                 if pandeiroHasTapped && violaHasTapped && atabaqueHasTapped && clapsHasTapped && pratoHasTapped && surdoHasTapped {
@@ -129,46 +129,46 @@ struct MapView: View {
                              the instruments, lets see how
                              they sound all together!
                              """)
-                            .font(.custom("Bonoco", size: getFontSize(50)))
+                            .font(.custom("Bonoco", size: responsiveX(50)))
                             .foregroundColor(Color(red: 0.15, green: 0.159, blue: 0.246))
                     }
-                    .padding(getFontSize(30))
+                    .padding(responsiveX(30))
                     .background(.white)
-                    .cornerRadius(getFontSize(30))
+                    .cornerRadius(responsiveX(30))
                     .shadow(radius: 5)
-                    .offset(y: getHeight(-300))
+                    .offset(y: responsiveY(-300))
                     
                     Image("leo_smiling")
                         .resizable()
-                        .frame(width: getWidth(571), height: getHeight(695))
-                        .offset(x: getWidth(-390), y: getHeight(150))
+                        .frame(width: responsiveX(571), height: responsiveY(695))
+                        .offset(x: responsiveX(-390), y: responsiveY(150))
                     
                     NavigationLink(destination: LiveLoopView()) {
                         ZStack {
                             Image("button_background3")
                                 .resizable()
-                                .frame(width: getWidth(750), height: getHeight(180))
-                                .offset(x: getWidth(-10), y: getHeight(10))
+                                .frame(width: responsiveX(750), height: responsiveY(180))
+                                .offset(x: responsiveX(-10), y: responsiveY(10))
                             
                             Text("Let`s play!!")
-                                .font(.custom("Bonoco", size: getFontSize(120)))
+                                .font(.custom("Bonoco", size: responsiveX(120)))
                                 .foregroundColor(Color(red: 0.721, green: 0.255, blue: 0.403))
                         }
                     }
-                    .offset(x: getWidth(300), y: getHeight(150))
+                    .offset(x: responsiveX(300), y: responsiveY(150))
 
                 } else {
                     VStack {
                         Text("try tapping on an instrument")
-                            .font(.custom("Bonoco", size: getFontSize(40)))
+                            .font(.custom("Bonoco", size: responsiveX(40)))
                             .foregroundColor(Color(red: 0.15, green: 0.159, blue: 0.246))
 //                            
                     }
-                    .padding(getFontSize(30))
+                    .padding(responsiveX(30))
                     .background(.white)
-                    .cornerRadius(getFontSize(30))
+                    .cornerRadius(responsiveX(30))
                     .shadow(radius: 5)
-                .offset(x: getWidth(-280), y: getHeight(-400))
+                .offset(x: responsiveX(-280), y: responsiveY(-400))
                 }
               
             }

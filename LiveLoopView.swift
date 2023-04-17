@@ -32,18 +32,18 @@ struct LiveLoopView: View {
             ZStack {
                 Image("live_loop_map")
                     .resizable()
-                    .frame(width: getWidth(1366), height: getHeight(1024))
+                    .frame(width: responsiveX(1366), height: responsiveY(1024))
                     .ignoresSafeArea()
                 
                 Image("man")
                     .resizable()
-                    .frame(width: getWidth(269), height: getHeight(394))
-                    .offset(x: getWidth(230), y: getHeight(-180))
+                    .frame(width: responsiveX(269), height: responsiveY(394))
+                    .offset(x: responsiveX(230), y: responsiveY(-180))
                 
                 Image("woman")
                     .resizable()
-                    .frame(width: getWidth(208), height: getHeight(394))
-                    .offset(x: getWidth(-200), y: getHeight(-180))
+                    .frame(width: responsiveX(208), height: responsiveY(394))
+                    .offset(x: responsiveX(-200), y: responsiveY(-180))
                 
                 if showText{
                     VStack {
@@ -51,14 +51,14 @@ struct LiveLoopView: View {
                             now its your turn to \(Text("samba").foregroundColor(Color(red: 0.961, green: 0.506, blue: 0.114)))! Tap any
                             instrument to toggle the sound.
                             """)
-                        .font(.custom("Bonoco", size: getFontSize(55)))
+                        .font(.custom("Bonoco", size: responsiveX(55)))
                         .foregroundColor(Color(red: 0.15, green: 0.159, blue: 0.246))
                     }
                     .padding(30)
                     .background(.white)
                     .cornerRadius(30)
                     .shadow(radius: 5)
-                    .offset(y: getHeight(-250))
+                    .offset(y: responsiveY(-250))
                 } else {
                     NavigationLink(destination: ContentView()) {
                         ZStack {
@@ -66,10 +66,10 @@ struct LiveLoopView: View {
                                 .resizable()
                             
                             Text("Play again")
-                                .font(.custom("Bonoco", size: getFontSize(70)))
+                                .font(.custom("Bonoco", size: responsiveX(70)))
                                 .foregroundColor(Color(red: 0.741, green: 0.224, blue: 0.388))
                         }
-                        .frame(width: getWidth(450), height: getHeight(150))
+                        .frame(width: responsiveX(450), height: responsiveY(150))
                     }
                     .simultaneousGesture(TapGesture().onEnded {
                         violaAudioPlayer?.stop()
@@ -79,7 +79,7 @@ struct LiveLoopView: View {
                         atabaqueAudioPlayer?.stop()
                         surdoAudioPlayer?.stop()
                     })
-                    .offset(x: getWidth(-440), y: getHeight(-410))
+                    .offset(x: responsiveX(-440), y: responsiveY(-410))
                 }
                 
                 VStack {
@@ -102,7 +102,7 @@ struct LiveLoopView: View {
                         
                         Spacer()
                     }
-                    .offset(y: getHeight(-10))
+                    .offset(y: responsiveY(-10))
                     
                     HStack {
                         Spacer()
@@ -123,7 +123,7 @@ struct LiveLoopView: View {
                         Spacer()
                     }
                 }
-                .offset(y: getHeight(270))
+                .offset(y: responsiveY(270))
                 
                 Spacer()
                 

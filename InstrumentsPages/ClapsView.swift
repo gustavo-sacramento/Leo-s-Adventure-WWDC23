@@ -21,15 +21,15 @@ struct ClapsView: View {
                 ZStack {
                     Image("back_button")
                         .resizable()
-                        .frame(width: getWidth(227), height: getHeight(107))
-                        .offset(x: getWidth(-30))
+                        .frame(width: responsiveX(227), height: responsiveY(107))
+                        .offset(x: responsiveX(-30))
                     
                     Text("Back")
-                        .font(.custom("Bonoco", size: getFontSize(35)))
+                        .font(.custom("Bonoco", size: responsiveX(35)))
                         .foregroundColor(Color(red: 0.824, green: 0.424, blue: 0.322))
                 }
             }
-            .offset(x: getWidth(-500), y: getHeight(-400))
+            .offset(x: responsiveX(-500), y: responsiveY(-400))
             
             Text("""
             Perhaps the oldest instrument ever: the
@@ -37,18 +37,18 @@ struct ClapsView: View {
             keeping rhythm in \(Text("samba").foregroundColor(Color(red: 0.961, green: 0.506, blue: 0.114))). Try tapping the
             hands to hear the sound!
             """)
-            .font(.custom("Bonoco", size: getFontSize(40)))
+            .font(.custom("Bonoco", size: responsiveX(40)))
             .foregroundColor(Color(red: 0.15, green: 0.159, blue: 0.246))
             .padding(30)
             .background(.white)
             .cornerRadius(30)
             .shadow(radius: 5)
-            .offset(x: getWidth(150), y: getHeight(-300))
+            .offset(x: responsiveX(150), y: responsiveY(-300))
             
             Image("leo_starry_eyed")
                 .resizable()
-                .frame(width: getWidth(571), height: getHeight(695))
-                .offset(x: getWidth(390), y: getHeight(150))
+                .frame(width: responsiveX(571), height: responsiveY(695))
+                .offset(x: responsiveX(390), y: responsiveY(150))
             
             Button {
                 if let audioPlayer {
@@ -64,15 +64,15 @@ struct ClapsView: View {
                 ZStack {
                     Image("circular_background")
                         .resizable()
-                        .frame(width: getWidth(505), height: getHeight(458))
-                        .offset(y: getHeight(-20))
+                        .frame(width: responsiveX(505), height: responsiveY(458))
+                        .offset(y: responsiveY(-20))
                     
                     Image("claps")
                         .resizable()
-                        .frame(width: getWidth(310), height: getHeight(310))
+                        .frame(width: responsiveX(310), height: responsiveY(310))
                 }
             }
-            .offset(x: getWidth(-330), y: getHeight(200))
+            .offset(x: responsiveX(-330), y: responsiveY(200))
             
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

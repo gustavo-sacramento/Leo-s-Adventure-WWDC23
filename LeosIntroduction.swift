@@ -54,8 +54,8 @@ struct LeosIntroduction: View {
             ZStack {
                 Image("clouds")
                     .resizable()
-                    .frame(width: getWidth(1366), height: getHeight(950))
-                    .offset(y: getHeight(-50))
+                    .frame(width: responsiveX(1366), height: responsiveY(950))
+                    .offset(y: responsiveY(-50))
                     .ignoresSafeArea()
                 
                 if pageNum == 4 {
@@ -63,50 +63,49 @@ struct LeosIntroduction: View {
                         ZStack {
                             Image("button_background2")
                                 .resizable()
-                                .frame(width: getWidth(650), height: getHeight(220))
-                                .offset(x: getWidth(-20))
+                                .frame(width: responsiveX(650), height: responsiveY(220))
+                                .offset(x: responsiveX(-20))
                             
                             Text("Let's go!")
-                                .font(.custom("Bonoco", size: getFontSize(130)))
-                                .frame(width: getWidth(600), height: getHeight(206))
+                                .font(.custom("Bonoco", size: responsiveX(130)))
+                                .frame(width: responsiveX(600), height: responsiveY(206))
                                 .foregroundColor(Color(red: 0.741, green: 0.224, blue: 0.388))
                         }
                     }
-                    .offset(x: getWidth(270), y: getHeight(220))
+                    .offset(x: responsiveX(270), y: responsiveY(220))
                 }
                 
                 VStack {
                     if pageNum == 0 {
-                        Text("Hi, Im ").font(.custom("Bonoco", size: getFontSize(60))).foregroundColor(Color(red: 38/255, green: 41/255, blue: 63/255)) + Text("LEO").font(.custom("Bonoco", size: getFontSize(60))).foregroundColor(Color(red: 0.486, green: 0.659, blue: 0.29)) + Text("!!").font(.custom("Bonoco", size: getFontSize(60))).foregroundColor(Color(red: 38/255, green: 41/255, blue: 63/255))
+                        Text("Hi, Im ").font(.custom("Bonoco", size: responsiveX(60))).foregroundColor(Color(red: 38/255, green: 41/255, blue: 63/255)) + Text("LEO").font(.custom("Bonoco", size: responsiveX(60))).foregroundColor(Color(red: 0.486, green: 0.659, blue: 0.29)) + Text("!!").font(.custom("Bonoco", size: responsiveX(60))).foregroundColor(Color(red: 38/255, green: 41/255, blue: 63/255))
                         
                     } else if pageNum == 1 {
                         Text("Awesome!")
-                            .font(.custom("Bonoco", size: getFontSize(60)))
-                            .frame(width: getWidth(730), height: getHeight(40))
+                            .font(.custom("Bonoco", size: responsiveX(60)))
+                            .frame(width: responsiveX(730), height: responsiveY(40))
                             .foregroundColor(Color(red: 38/255, green: 41/255, blue: 63/255))
                             .multilineTextAlignment(.center)
                     }
 
                     
                     Text("\(texts[pageNum])")
-                    .font(.custom("Bonoco", size: getFontSize(40)))
+                    .font(.custom("Bonoco", size: responsiveX(40)))
                     .foregroundColor(Color(red: 0.15, green: 0.159, blue: 0.246))
                 }
-                .padding(getFontSize(40))
+                .padding(responsiveX(40))
                 .background(.white)
-                .cornerRadius(getFontSize(30))
+                .cornerRadius(responsiveX(30))
                 .shadow(radius: 5)
-                .offset(x: getWidth(180), y: getHeight(-250))
+                .offset(x: responsiveX(180), y: responsiveY(-250))
                 
                 Image("\(leoFaces[pageNum])")
                     .resizable()
-                    .frame(width: getWidth(571), height: getHeight(695))
-                    .offset(x: getWidth(-390), y: getHeight(180))
+                    .frame(width: responsiveX(571), height: responsiveY(695))
+                    .offset(x: responsiveX(-390), y: responsiveY(180))
                 
                 Button {
                     if pageNum < 4 {
                         pageNum += 1
-                        print(getFontSize(40))
                     }
                     print(pageNum)
                 } label: {
@@ -114,27 +113,27 @@ struct LeosIntroduction: View {
                         if pageNum == 0 {
                             Image("button_background1")
                                 .resizable()
-                                .frame(width: getWidth(490), height: getHeight(220))
-                                .offset(x: getWidth(-19))
+                                .frame(width: responsiveX(490), height: responsiveY(220))
+                                .offset(x: responsiveX(-19))
                             
                             Text("sure!")
-                                .font(.custom("Bonoco", size: getFontSize(130)))
-                                .frame(width: getWidth(414), height: getHeight(206))
+                                .font(.custom("Bonoco", size: responsiveX(130)))
+                                .frame(width: responsiveX(414), height: responsiveY(206))
                                 .foregroundColor(Color(red: 0.741, green: 0.224, blue: 0.388))
                         } else if pageNum < 4 {
                             Image("button_background4")
                                 .resizable()
-                                .frame(width: getWidth(490), height: getHeight(220))
+                                .frame(width: responsiveX(490), height: responsiveY(220))
                             
                             Text("next")
-                                .font(.custom("Bonoco", size: getFontSize(140)))
+                                .font(.custom("Bonoco", size: responsiveX(140)))
 //                                .frame(width: getWidth(414), height: getHeight(206))
                                 .foregroundColor(Color(red: 0.741, green: 0.224, blue: 0.388))
-                                .offset(y: getHeight(-10))
+                                .offset(y: responsiveY(-10))
                         }
                     }
                 }
-                .offset(x: getWidth(270), y: getHeight(220))
+                .offset(x: responsiveX(270), y: responsiveY(220))
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(red: 162/255, green: 220/255, blue: 248/255))
