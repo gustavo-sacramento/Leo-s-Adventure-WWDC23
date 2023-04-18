@@ -98,21 +98,6 @@ struct LiveLoopView: View {
                         }
                         .frame(width: responsiveX(400), height: responsiveY(150))
                     }
-                    .simultaneousGesture(TapGesture().onEnded {
-//                        violaAudioPlayer?.pause()
-//                        pandeiroAudioPlayer?.pause()
-//                        clapsAudioPlayer?.pause()
-//                        pratoAudioPlayer?.pause()
-//                        atabaqueAudioPlayer?.pause()
-//                        surdoAudioPlayer?.pause()
-//
-//                        violaIsOn = false
-//                        pandeiroIsOn = false
-//                        clapsIsOn = false
-//                        pratoIsOn = false
-//                        atabaqueIsOn = false
-//                        surdoIsOn = false
-                    })
                     .offset(x: responsiveX(470), y: responsiveY(-410))
 
                     

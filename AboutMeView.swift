@@ -34,6 +34,7 @@ struct AboutMeView: View {
             VStack {
                 Text("Hi! My name is gustavo and I'm a computer engineering student from Salvador, Brazil. Since I was very young, i've always been fascinated by music and culture, especially the culture of my country.\n\nI designed this game to emphasize the importance of \(Text("samba de roda").foregroundColor(Color(red: 0.741, green: 0.224, blue: 0.388))) for Brazilian culture and it's people, as well as an opportunity for children to have fun playing with music.\n\nAs of 2008, \(Text("Samba de Roda").foregroundColor(Color(red: 0.741, green: 0.224, blue: 0.388))) of the Reconcavo of Bahia has been inscribed on the Representative List of the Intangible Cultural Heritage of Humanity by UNesco.")
                     .font(.custom("Bonoco", size: 30))
+                    .foregroundColor(Color(red: 0.15, green: 0.159, blue: 0.246))
             }
             .padding(30)
             .background(.white)
