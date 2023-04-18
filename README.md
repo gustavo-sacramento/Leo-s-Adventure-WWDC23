@@ -1,7 +1,7 @@
 ##  WWDC23 Swift Student Challenge Submission
 # Leo's Adventure - A journey through the roots of samba
 
-This is my submission for the WWDC23 Swift Student Challenge. It's an interactive game designed for children that explores a traditional brazilian musical rhythm 'samba de roda'. The game is based on the different instruments and sounds that make up the rhythm, while also giving a historical background of the importance of Samba for brazilian people. The game is designed for iPad with iOS 16 and up. The use of headphones is recommended for the best sound experience.
+This is my submission for the WWDC23 Swift Student Challenge. It's an interactive game designed for children that explores a traditional brazilian musical rhythm 'samba de roda'. The game is based on the different instruments and sounds that make up the rhythm, while also giving a historical background of the importance of Samba for brazilian people. The game is designed for iPad with iOS 16 and up. The use of headphones is recommended for the best sound experience. If you wish to run the app on an xcode simulator with headphones, don't forget to change the audio output to your external headphones from the simulator screen (I/O -> Audio Output -> External Heaphones).
 
 ## Technologies Used
 `SwiftUI` `AVFoundation` `AVFAudio`
