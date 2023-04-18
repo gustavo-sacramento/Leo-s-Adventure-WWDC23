@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-import AVKit
-import UIKit
 import AVFoundation
 
 @available(iOS 16.0, *)

@@ -127,7 +127,6 @@ struct LeosIntroduction: View {
                             
                             Text("next")
                                 .font(.custom("Bonoco", size: responsiveX(140)))
-//                                .frame(width: getWidth(414), height: getHeight(206))
                                 .foregroundColor(Color(red: 0.741, green: 0.224, blue: 0.388))
                                 .offset(y: responsiveY(-10))
                         }
