@@ -38,7 +38,6 @@ struct LiveLoopView: View {
             ZStack {
                 Image("live_loop_map")
                     .resizable()
-                    .frame(width: responsiveX(1366), height: responsiveY(1024))
                     .ignoresSafeArea()
                 
                 Image("man")
@@ -86,6 +85,37 @@ struct LiveLoopView: View {
                         surdoAudioPlayer?.pause()
                     })
                     .offset(x: responsiveX(-440), y: responsiveY(-410))
+                    
+                    NavigationLink(destination: AboutMeView()) {
+                        ZStack {
+                            Image("button_background5")
+                                .resizable()
+                            
+                            Text("About Me")
+                                .font(.custom("Bonoco", size: responsiveX(60)))
+                                .foregroundColor(.white)
+                                .offset(y: responsiveY(-5))
+                        }
+                        .frame(width: responsiveX(400), height: responsiveY(150))
+                    }
+                    .simultaneousGesture(TapGesture().onEnded {
+//                        violaAudioPlayer?.pause()
+//                        pandeiroAudioPlayer?.pause()
+//                        clapsAudioPlayer?.pause()
+//                        pratoAudioPlayer?.pause()
+//                        atabaqueAudioPlayer?.pause()
+//                        surdoAudioPlayer?.pause()
+//
+//                        violaIsOn = false
+//                        pandeiroIsOn = false
+//                        clapsIsOn = false
+//                        pratoIsOn = false
+//                        atabaqueIsOn = false
+//                        surdoIsOn = false
+                    })
+                    .offset(x: responsiveX(470), y: responsiveY(-410))
+
+                    
                 }
                 
                 VStack {
@@ -137,35 +167,37 @@ struct LiveLoopView: View {
             }
             .navigationBarBackButtonHidden(true)
             .onAppear(perform: {
-                playSound("pandeiro.mp3", &pandeiroAudioPlayer, &pandeiroLooper)
-                playSound("viola.mp3", &violaAudioPlayer, &violaLooper)
-                playSound("claps.mp3", &clapsAudioPlayer, &clapsLooper)
-                playSound("surdo.mp3", &surdoAudioPlayer, &surdoLooper)
-                playSound("atabaque.mp3", &atabaqueAudioPlayer, &atabaqueLooper)
-                playSound("prato.mp3", &pratoAudioPlayer, &pratoLooper)
-                
-                let when = DispatchTime.now()
-                
-                DispatchQueue.main.asyncAfter(deadline: when + 0.1) {
+                if showText {
+                    playSound("pandeiro.mp3", &pandeiroAudioPlayer, &pandeiroLooper)
+                    playSound("viola.mp3", &violaAudioPlayer, &violaLooper)
+                    playSound("claps.mp3", &clapsAudioPlayer, &clapsLooper)
+                    playSound("surdo.mp3", &surdoAudioPlayer, &surdoLooper)
+                    playSound("atabaque.mp3", &atabaqueAudioPlayer, &atabaqueLooper)
+                    playSound("prato.mp3", &pratoAudioPlayer, &pratoLooper)
                     
-                    if let pandeiroAudioPlayer, let violaAudioPlayer, let clapsAudioPlayer, let surdoAudioPlayer, let pratoAudioPlayer, let atabaqueAudioPlayer {
+                    let when = DispatchTime.now()
+                    
+                    DispatchQueue.main.asyncAfter(deadline: when + 0.1) {
                         
-                        let syncTime = CMClockGetHostTimeClock()
-                        let hostTime = CMClockGetTime(syncTime)
-                        
-                        let arr = [pandeiroAudioPlayer, violaAudioPlayer, clapsAudioPlayer, surdoAudioPlayer, pratoAudioPlayer, atabaqueAudioPlayer]
-                        
-                        for player in arr {
-                            if player.status != .readyToPlay {
-                                return
+                        if let pandeiroAudioPlayer, let violaAudioPlayer, let clapsAudioPlayer, let surdoAudioPlayer, let pratoAudioPlayer, let atabaqueAudioPlayer {
+                            
+                            let syncTime = CMClockGetHostTimeClock()
+                            let hostTime = CMClockGetTime(syncTime)
+                            
+                            let arr = [pandeiroAudioPlayer, violaAudioPlayer, clapsAudioPlayer, surdoAudioPlayer, pratoAudioPlayer, atabaqueAudioPlayer]
+                            
+                            for player in arr {
+                                if player.status != .readyToPlay {
+                                    return
+                                }
+                                player.preroll(atRate: 1.0)
                             }
-                            player.preroll(atRate: 1.0)
+                            
+                            for player in arr {
+                                player.setRate(1.0, time: .invalid, atHostTime: hostTime)
+                            }
+                            
                         }
-                        
-                        for player in arr {
-                            player.setRate(1.0, time: .invalid, atHostTime: hostTime)
-                        }
-                        
                     }
                 }
             })

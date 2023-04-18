@@ -92,6 +92,7 @@ struct PratoView: View {
         }
         
         if let audioPlayer {
+            audioPlayer.setVolume(0.6, fadeDuration: 0)
             audioPlayer.play()
         }
     }

@@ -90,6 +90,7 @@ struct ViolaView: View {
         }
         
         if let audioPlayer {
+            audioPlayer.setVolume(0.4, fadeDuration: 0)
             audioPlayer.play()
         }
     }
