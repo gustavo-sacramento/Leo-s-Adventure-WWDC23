@@ -8,36 +8,37 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "WWDC23",
+    name: "Leo's Adventure",
     platforms: [
-        .iOS("15.2")
+        .iOS("16.0")
     ],
     products: [
         .iOSApplication(
-            name: "WWDC23",
+            name: "Leo's Adventure",
             targets: ["AppModule"],
             bundleIdentifier: "com.gsacramento.WWDC23",
             teamIdentifier: "4G6HA9J6S5",
             displayVersion: "1.0",
             bundleVersion: "1",
-            appIcon: .placeholder(icon: .smiley),
-            accentColor: .presetColor(.indigo),
+            appIcon: .asset("AppIcon"),
+            accentColor: .presetColor(.teal),
             supportedDeviceFamilies: [
                 .pad,
-                .phone
+                 .phone
             ],
             supportedInterfaceOrientations: [
-                .portrait,
                 .landscapeRight,
-                .landscapeLeft,
-                .portraitUpsideDown(.when(deviceFamilies: [.pad]))
+                .landscapeLeft
             ]
         )
     ],
     targets: [
         .executableTarget(
             name: "AppModule",
-            path: "."
+            path: ".",
+            resources: [
+                .process("Resources")
+            ]
         )
     ]
 )
